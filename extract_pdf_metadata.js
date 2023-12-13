@@ -1,5 +1,6 @@
-// importera exifr för att ta metadata från bilderna
-import exifr from 'exifr';
+// importera exifr för att ta metadata från bild npm install pdf-parse-forkerna
+import pdfParse from 'pdf-parse-fork';
+
 import mysql from 'mysql2/promise';
 //Importera file system (fs) - inbyggt i node.js
 import fs from 'fs';
@@ -15,7 +16,7 @@ const db = await mysql.createConnection({
     password: 'guessagain94',
     database: 'group4.Metadata'
   });
- 
+
 // Funktion för att skapa querys
 async function query(sql, listOfValues) {
   let result = await db.execute(sql, listOfValues);
@@ -26,19 +27,19 @@ async function query(sql, listOfValues) {
 const files = await fs.readdirSync('pdfs');
  
 // Loopa genom alla bilder och läs metadata
-for (let pdfs of pdfs) {
+for (let pdf of pdfs) {
  
   // Ta metadatan från filen
-  let metadata = await exifr.parse('pdfs/' + pdfs);
+  let metadata = await pdfParse(fs.readFileSync('./pdfs/' + pdf));
  
   // Sätt in i databasen med hjälp av query funktionen
   let result = await query(`
     INSERT INTO pdf (pdfName, pdfDescription)
     VALUES(?, ?)
-  `, [pdfName, pdfDescription]);
+  `, [pdf, metadata]);
  
   // Logga resultatet för att se att något händer.
-  console.log(pdfs, result);
+  console.log(pdf, result);
  
 }
  
