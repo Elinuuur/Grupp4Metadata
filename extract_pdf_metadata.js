@@ -1,4 +1,4 @@
-// importera exifr för att ta metadata från bild npm install pdf-parse-forkerna
+// Import the fork module
 import pdfParse from 'pdf-parse-fork';
 
 import mysql from 'mysql2/promise';

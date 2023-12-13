@@ -1,15 +1,16 @@
 // Import the file system module (fs)
 import fs from 'fs';
 
+//Import mysql
 import mysql from 'mysql2/promise';
 
 // Read the json string from file
-let json = fs.readFileSync('csvjson.json', 'utf-8');
+let json = fs.readFileSync('powerpoints_csvjson.json', 'utf-8');
 
 // Convert from a string to a real data structure
 let data = JSON.parse(json);
 
-// Kopplar oss till databasen
+// Connect to db
 const db = await mysql.createConnection({
     host: '161.97.144.27',
     port: "8094",
@@ -34,16 +35,8 @@ for (let json of data) {
   delete json.sha256;
   delete json.sha512;
 
-  // console.log things to see that we have correct 
-  // filname and metadata
-  // (that eventually want to write to the db)
-  console.log('');
-  console.log(fileName);
-  console.log(json);
-
-  // TODO: Do something like this to INSERT the data in our database
   let result = await query(`
-    INSERT INTO powerpoint (powerpointName, powerpointDescription)
+    INSERT INTO powerpoints (powerpointsName, powerpointsDescription)
     VALUES(?, ?)
   `, [fileName, json]);
 
