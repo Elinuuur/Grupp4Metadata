@@ -14,12 +14,16 @@ async function search() {
       <p>Found ${powerpoints.length} results.</p>
     `;
     // loop through the cats
-    for (let powerpoints of powerpoints) {
+    for (let powerpoint of powerpoints) {
       html += `
         <section>
-          <h2>${powerpoints.powerpointsName}</h2>
-          <img src="powerpoints/${powerpoint.meta.image}">
-          <p>${powerpoint.meta.description}</p>
+          <h2>${powerpoint.powerpointsDescription.title}</h2>
+           
+          <h3>${powerpoint.powerpointsDescription.company}</h3>
+          <p> 
+            <a href="powerpoints/${powerpoint.powerpointsName}">Download the PowerPoint</a>.
+          </p>
+          
         </section>
       `;
     }
