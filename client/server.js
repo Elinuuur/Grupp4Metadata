@@ -17,7 +17,6 @@ app.listen(3000, () =>
   console.log('Listening on http://localhost:3000'));
 
 
-
 // Create a connection 'db' to the database
 const db = await mysql.createConnection({
   host: '161.97.144.27',
@@ -46,7 +45,7 @@ app.get('/api/music/:searchTerm/:searchType', async (request, response) => {
     let sql = `
      SELECT * 
      FROM music
-     WHERE LOWER(metadata -> '$.common.${searchType}') LIKE LOWER (?)
+     WHERE LOWER(musicDescription -> '$.common.${searchType}') LIKE LOWER (?)
     `;
   
     // since the sql gets a bit different if you want to search all
@@ -55,7 +54,7 @@ app.get('/api/music/:searchTerm/:searchType', async (request, response) => {
       sql = `
         SELECT *
         FROM music
-        WHERE LOWER(metadata) LIKE LOWER (?)
+        WHERE LOWER(musicDescription) LIKE LOWER (?)
       `;
     }
   
@@ -90,7 +89,7 @@ app.get('/api/photos/:searchTerm', async (request, response) => {
     SELECT *
     FROM photos
     WHERE 
-      LOWER(CONCAT(name, ' ', meta->'$.description')) 
+      LOWER (photosDescription) 
       LIKE LOWER(?)
   `, ['%' + searchTerm + '%']);
   // Send a response to the client
@@ -99,9 +98,9 @@ app.get('/api/photos/:searchTerm', async (request, response) => {
 
 
 // Create a REST-api route
-// When somebody asks for http://localhost:3000/api/pdf
+// When somebody asks for http://localhost:3000/api/pdfs
 // send som JSON based on a database query
-app.get('/api/pdf', async (request, response) => {
+app.get('/api/pdfs', async (request, response) => {
     // Make a database query and remember the result
     let result = await query(`
       SELECT *
@@ -113,7 +112,7 @@ app.get('/api/pdf', async (request, response) => {
   
   // A search route to find a cat by parts of its name
   // or parts of its description
-  app.get('/api/pdf/:searchTerm', async (request, response) => {
+  app.get('/api/pdfs/:searchTerm', async (request, response) => {
     // Get the search term from as a parameter from the route/url
     let searchTerm = request.params.searchTerm;
     // Make a database query and remember the result
@@ -122,7 +121,7 @@ app.get('/api/pdf', async (request, response) => {
       SELECT *
       FROM pdfs
       WHERE 
-        LOWER(CONCAT(name, ' ', meta->'$.description')) 
+        LOWER (pdfsDescription) 
         LIKE LOWER(?)
     `, ['%' + searchTerm + '%']);
     // Send a response to the client
@@ -131,7 +130,7 @@ app.get('/api/pdf', async (request, response) => {
 
 
   // Create a REST-api route
-// When somebody asks for http://localhost:3000/api/photos
+// When somebody asks for http://localhost:3000/api/powerpoints
 // send som JSON based on a database query
 app.get('/api/powerpoints', async (request, response) => {
     // Make a database query and remember the result
@@ -154,7 +153,7 @@ app.get('/api/powerpoints', async (request, response) => {
       SELECT *
       FROM powerpoints
       WHERE 
-        LOWER(CONCAT(name, ' ', meta->'$.description')) 
+        LOWER(powerpointsDescription)
         LIKE LOWER(?)
     `, ['%' + searchTerm + '%']);
     // Send a response to the client

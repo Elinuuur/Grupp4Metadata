@@ -18,7 +18,7 @@ async function search() {
       html += `
         <section>
           <h2>${pdfs.pdfsName}</h2>
-          <link src="pdfs/${pdf.meta.image}">
+          <link src="pdfs/${pdfs.meta.image}">
           <p>${pdfs.meta.description}</p>
         </section>
       `;
