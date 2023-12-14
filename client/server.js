@@ -96,3 +96,67 @@ app.get('/api/photos/:searchTerm', async (request, response) => {
   // Send a response to the client
   response.json(result);
 });
+
+
+// Create a REST-api route
+// When somebody asks for http://localhost:3000/api/pdf
+// send som JSON based on a database query
+app.get('/api/pdf', async (request, response) => {
+    // Make a database query and remember the result
+    let result = await query(`
+      SELECT *
+      FROM pdfs
+    `);
+    // Send a response to the client
+    response.json(result);
+  });
+  
+  // A search route to find a cat by parts of its name
+  // or parts of its description
+  app.get('/api/pdf/:searchTerm', async (request, response) => {
+    // Get the search term from as a parameter from the route/url
+    let searchTerm = request.params.searchTerm;
+    // Make a database query and remember the result
+    // using the search term
+    let result = await query(`
+      SELECT *
+      FROM pdfs
+      WHERE 
+        LOWER(CONCAT(name, ' ', meta->'$.description')) 
+        LIKE LOWER(?)
+    `, ['%' + searchTerm + '%']);
+    // Send a response to the client
+    response.json(result);
+  });
+
+
+  // Create a REST-api route
+// When somebody asks for http://localhost:3000/api/photos
+// send som JSON based on a database query
+app.get('/api/powerpoints', async (request, response) => {
+    // Make a database query and remember the result
+    let result = await query(`
+      SELECT *
+      FROM powerpoints
+    `);
+    // Send a response to the client
+    response.json(result);
+  });
+  
+  // A search route to find a cat by parts of its name
+  // or parts of its description
+  app.get('/api/powerpoints/:searchTerm', async (request, response) => {
+    // Get the search term from as a parameter from the route/url
+    let searchTerm = request.params.searchTerm;
+    // Make a database query and remember the result
+    // using the search term
+    let result = await query(`
+      SELECT *
+      FROM powerpoints
+      WHERE 
+        LOWER(CONCAT(name, ' ', meta->'$.description')) 
+        LIKE LOWER(?)
+    `, ['%' + searchTerm + '%']);
+    // Send a response to the client
+    response.json(result);
+  });
