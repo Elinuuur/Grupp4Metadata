@@ -68,7 +68,7 @@ app.get('/api/music/:searchTerm/:searchType', async (request, response) => {
 // Create a REST-api route
 // When somebody asks for http://localhost:3000/api/photos
 // send som JSON based on a database query
-app.get('/api/photos', async (request, response) => {
+app.get('/api/photos/:searchTerm/:searchType', async (request, response) => {
   // Make a database query and remember the result
   let result = await query(`
     SELECT *
