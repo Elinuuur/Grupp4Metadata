@@ -5,22 +5,26 @@ async function search() {
     // empty the input field
     document.forms.searchForm.term.value = '';
     // read the json
-    let rawData = await fetch('/api/cats/' + searchTerm);
+    let rawData = await fetch('/api/photos/' + searchTerm);
     // convert json to a javascript data structure
-    let cats = await rawData.json();
+    let photos = await rawData.json();
     // create an variable name that initially is an empty string
     let html = `
       <p>You searched for "${searchTerm}"...</p>
-      <p>Found ${cats.length} results.</p>
+      <p>Found ${photos.length} results.</p>
     `;
-    // loop through the cats
-    for (let cat of cats) {
+    // loop through the photos
+    for (let photo of photos) {
+        let meta = photo.photosDescription;
       html += `
-        <section>
-          <h2>${cat.name}</h2>
-          <img src="images/${cat.meta.image}">
-          <p>${cat.meta.description}</p>
-        </section>
+      <section>
+      <h2>${photos.photosName}</h2>
+      <a href="https://maps.google.com/?q=${photos.photosDescription.latitude},${photos.photosDescription.longitude}" target="_blank"><img src="/images/${image.fileName}"></a>
+      <p><b>Source:</b> ${meta.FileSource}</p>
+      <p><b>Picture Taken:</b> ${meta.CreateDate}</p>  
+      <p><b>Longitude:</b> ${meta.longitude}</p>
+      <p><b>Latitude:</b> ${meta.latitude}</p>
+    </section>
       `;
     }
     // Grab the element/tag with the class searchResults
@@ -28,4 +32,7 @@ async function search() {
     // Change the content of the searchResults element
     searchResultsElement.innerHTML = html;
   }
+  
+
+
   
