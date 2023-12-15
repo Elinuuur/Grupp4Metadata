@@ -1,14 +1,37 @@
-#nav {
+ #nav {
     width:750px;
     margin:0 auto;
     list-style:none;
+    text-align: center;
+    padding-top: 45vh;
     }
+
     #nav li {
-    float:left;
+    float:center;
+    padding: 10px;
     }
+
     #nav a {
-    display:block;
+    display:inline-block;
+
     text-align:center;
-    width:150px; /* fixed width */
-    text-decoration:none; 
+    width:150px; 
+    text-decoration:none;
+    display: inline-block;
+    padding: 10px 30px;
+    border-radius: 5px;
+    background-color: rgb(97, 113, 220);
+    text-size-adjust: 10px;
     }
+
+    #nav a:hover {
+        background-color:rgb(113, 225, 175);
+    }
+
+.index-style{
+    background-image:url(backgrounds/mainpage.jpg) ;
+}
+
+.main-powerpoints{
+    background-image:url(backgrounds/powerpoint.jpg) ;
+}

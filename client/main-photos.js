@@ -19,7 +19,7 @@ async function search() {
       html += `
       <section>
       <h2>${photos.photosName}</h2>
-      <a href="https://maps.google.com/?q=${photos.photosDescription.latitude},${photos.photosDescription.longitude}" target="_blank"><img src="/images/${image.fileName}"></a>
+      <a href="https://maps.google.com/?q=${photo.photosDescription.latitude},${photo.photosDescription.longitude}" target="_blank"><img src="/images/${photo.photosName}"></a>
       <p><b>Source:</b> ${meta.FileSource}</p>
       <p><b>Picture Taken:</b> ${meta.CreateDate}</p>  
       <p><b>Longitude:</b> ${meta.longitude}</p>
