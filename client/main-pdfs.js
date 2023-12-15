@@ -13,14 +13,16 @@ async function search() {
       <p>You searched for "${searchTerm}"...</p>
       <p>Found ${pdfs.length} results.</p>
     `;
-    // loop through the cats
+    // loop through the pdfs
     for (let pdf of pdfs) {
-      console.log(pdf)
+      let meta = pdf.pdfsDescription.info;
+      console.log(pdf.pdfsName);
       html += `
         <section>
-          <h2>${pdf.pdfsDescription.info.Title}</h2>
-          <a target="_blank" href="pdfs/${pdf.pdfsName}">
-          <p>${pdf.pdfsDescription.info.Author}</p>
+          <h2>${meta.Title}</h2>
+          <p><b>Author:</b>${meta.Author}</p>
+          <p><b>Creator:</b>${meta.Creator}</p>
+            <a href="pdfs/${pdf.pdfsName}">Download the PDF</a>.
         </section>
       `;
     }
