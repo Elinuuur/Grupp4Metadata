@@ -18,7 +18,7 @@ async function search() {
         let meta = photo.photosDescription;
       html += `
       <section>
-      <h2>${photos.photosName}</h2>
+      <h2>${photo.photosName}</h2>
       <a href="https://maps.google.com/?q=${photo.photosDescription.latitude},${photo.photosDescription.longitude}" target="_blank"><img src="/images/${photo.photosName}"></a>
       <p><b>Source:</b> ${meta.FileSource}</p>
       <p><b>Picture Taken:</b> ${meta.CreateDate}</p>  

@@ -30,8 +30,46 @@
 
 .index-style{
     background-image:url(backgrounds/mainpage.jpg) ;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: right;
 }
 
 .main-powerpoints{
     background-image:url(backgrounds/powerpoint.jpg) ;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: right;
+}
+
+.main-music{
+    background-image:url(backgrounds/music.jpg) ;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: right;
+}
+
+.main-pdfs{
+    background-image:url(backgrounds/pdf.jpg) ;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: right;
+}
+
+.main-photos{
+    background-image:url(backgrounds/photos.jpg) ;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: right;
+}
+
+img{
+    width: 200px;
+    float: right;
+}
+
+section{
+    overflow: auto;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
 }

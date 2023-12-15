@@ -95,9 +95,9 @@ app.get('/api/photos/:searchTerm', async (request, response) => {
     // using the search term
     let result = await query(`
       SELECT *
-      FROM pdfs
+      FROM pdf
       WHERE 
-        LOWER (pdfsDescription) 
+        LOWER (pdfsDescription -> '$.info') 
         LIKE LOWER(?)
     `, ['%' + searchTerm + '%']);
     // Send a response to the client

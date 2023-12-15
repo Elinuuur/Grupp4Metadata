@@ -10,25 +10,27 @@ async function search() {
     // read the json
     let rawData = await fetch('/api/music/' + searchTerm + '/' + searchType);
     // convert json to a javascript data structure
-    let musics = await rawData.json();
+    let songs = await rawData.json();
     // create an variable name that initially is an empty string
     let html = `
       <p>You searched for "${searchTerm}"...</p>
-      <p>Hittade ${musics.length} låtar.</p>
+      <p>Found ${songs.length} results.</p>
     `;
     // loop through the found songs
-    for (let music of musics) {
-      let music = music.musicDescription.common;
-      html += `
-        <section>
-          <h2>${musicDescription.title}</h2>
-          <p><b>Artist:</b> ${musicDescription.artist}</p>
-          <p><b>Album:</b> ${musicDescription.album}</p>  
-          <p>
-            <audio controls src="music/${musicDescription.musicName}">
-          </p>
-        </section>
-      `;
+
+    for (let song of songs) {
+        let meta = song.musicDescription.common;
+        html += `
+          <section>
+            <h2>${meta.title}</h2>
+            <p><b>Artist:</b> ${meta.artist}</p>
+            <p><b>Album:</b> ${meta.album}</p>  
+            <p>
+              <audio controls src="music/${song.musicName}">
+            </p>
+          </section>
+        `;
+
     }
     // Grab the element/tag with the class searchResults
     let searchResultsElement = document.querySelector('.searchResults');
